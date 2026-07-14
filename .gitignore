@@ -1,0 +1,10 @@
+# 민감 정보 - 절대 커밋 금지
+secret.yaml
+secrets/
+*.pem
+*.key
+kubeconfig*
+.kube/
+
+# 기타
+*.log

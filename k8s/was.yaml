@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: was
+  namespace: was
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: was
+  template:
+    metadata:
+      labels:
+        app: was
+    spec:
+      imagePullSecrets:
+        - name: ncr-secret
+      containers:
+        - name: was
+          image: f2da3ca6-kr2-registry.container.nhncloud.com/lab-ncr/suwon-was:1.0
+          ports:
+            - containerPort: 4000
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: was-secret
+                  key: DATABASE_URL
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 4000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: was-svc
+  namespace: was
+spec:
+  selector:
+    app: was
+  ports:
+    - port: 4000
+      targetPort: 4000
+  type: ClusterIP

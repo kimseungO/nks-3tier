@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # 블랙박스: 외부에서 서비스 접속 확인
+  - job_name: 'blackbox-http'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]      # 2xx 응답을 기대
+    static_configs:
+      - targets:
+          - http://114.110.161.208/            # web 메인 페이지
+          - http://114.110.161.208/api/health  # was API
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115   # blackbox-exporter 주소

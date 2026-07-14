@@ -1,0 +1,108 @@
+controller:
+  type: daemonset
+  hostPID: true
+  volumes:
+    extra:
+      - name: host-root
+        hostPath:
+          path: /
+      - name: host-proc
+        hostPath:
+          path: /proc
+      - name: host-sys
+        hostPath:
+          path: /sys
+
+alloy:
+  mounts:
+    extra:
+      - name: host-root
+        mountPath: /host/root
+        readOnly: true
+      - name: host-proc
+        mountPath: /host/proc
+        readOnly: true
+      - name: host-sys
+        mountPath: /host/sys
+        readOnly: true
+  configMap:
+    content: |
+      // ===== 노드 시스템 지표 =====
+      prometheus.exporter.unix "node" {
+        rootfs_path = "/host/root"
+        procfs_path = "/host/proc"
+        sysfs_path  = "/host/sys"
+      }
+
+      prometheus.scrape "node" {
+        targets    = prometheus.exporter.unix.node.targets
+        forward_to = [prometheus.remote_write.mgt.receiver]
+      }
+
+      // ===== 노드 자동 발견 =====
+      discovery.kubernetes "nodes" {
+        role = "node"
+      }
+
+      // ===== 컨테이너 지표 (cAdvisor) =====
+      discovery.relabel "cadvisor" {
+        targets = discovery.kubernetes.nodes.targets
+        rule {
+          replacement  = "/metrics/cadvisor"
+          target_label = "__metrics_path__"
+        }
+      }
+
+      prometheus.scrape "cadvisor" {
+        targets    = discovery.relabel.cadvisor.output
+        forward_to = [prometheus.remote_write.mgt.receiver]
+        scheme     = "https"
+        bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+        tls_config {
+          ca_file = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          insecure_skip_verify = true
+        }
+      }
+
+      // ===== kubelet 지표 =====
+      prometheus.scrape "kubelet" {
+        targets    = discovery.kubernetes.nodes.targets
+        forward_to = [prometheus.remote_write.mgt.receiver]
+        scheme     = "https"
+        bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+        tls_config {
+          ca_file = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          insecure_skip_verify = true
+        }
+      }
+
+      // ===== kube-state-metrics 발견 및 수집 =====
+      discovery.kubernetes "ksm" {
+        role = "service"
+
+        namespaces {
+          names = ["monitoring"]
+        }
+      }
+
+      discovery.relabel "ksm" {
+        targets = discovery.kubernetes.ksm.targets
+
+        rule {
+          source_labels = ["__meta_kubernetes_service_name"]
+          regex         = "kube-state-metrics"
+          action        = "keep"
+        }
+      }
+
+      prometheus.scrape "ksm" {
+        targets    = discovery.relabel.ksm.output
+        forward_to = [prometheus.remote_write.mgt.receiver]
+      }
+
+      // ===== Mgt VPC Prometheus로 push =====
+      prometheus.remote_write "mgt" {
+        endpoint {
+          url = "http://10.0.1.84:9090/api/v1/write"
+        }
+      }
