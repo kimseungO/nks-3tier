@@ -1,0 +1,63 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: kaniko
+            image: gcr.io/kaniko-project/executor:debug
+            command: ["/busybox/cat"]
+            tty: true
+            volumeMounts:
+            - name: kaniko-secret
+              mountPath: /kaniko/.docker
+          - name: kubectl
+            image: alpine/k8s:1.31.0
+            command: ["cat"]
+            tty: true
+          volumes:
+          - name: kaniko-secret
+            secret:
+              secretName: kaniko-ncr-secret
+              items:
+              - key: .dockerconfigjson
+                path: config.json
+      '''
+    }
+  }
+
+  environment {
+    REGISTRY = 'f2da3ca6-kr2-registry.container.nhncloud.com/lab-ncr'
+    IMAGE = 'suwon-was'
+    TAG = "${BUILD_NUMBER}"
+  }
+
+  stages {
+    stage('Build & Push') {
+      steps {
+        container('kaniko') {
+          sh '''
+            /kaniko/executor \
+              --context=`pwd`/was \
+              --dockerfile=`pwd`/was/Dockerfile \
+              --destination=${REGISTRY}/${IMAGE}:${TAG}
+          '''
+        }
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        container('kubectl') {
+          sh '''
+            kubectl set image deployment/was \
+              was=${REGISTRY}/${IMAGE}:${TAG} \
+              -n was
+          '''
+        }
+      }
+    }
+  }
+}
