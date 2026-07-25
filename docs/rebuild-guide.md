@@ -410,6 +410,26 @@ Grafana: localhost:3000 (admin/admin), Prometheus: localhost:9091
 - Data source: Prometheus, URL `http://prometheus:9090` (localhost 아님, 컨테이너 이름)
 - Dashboard import: ID 315 (Kubernetes cluster monitoring)
 
+## 10 HPA (Pod 오토스케일링)
+
+### 전제
+- metrics-server 애드온 설치 (섹션 1 Add-ons)
+- was.yaml에 resources.requests.cpu 설정 (HPA 계산 기준)
+
+### 적용
+HPA 매니페스트는 앱 레포의 k8s/was-hpa.yaml에 있고
+CI/CD 파이프라인이 apply한다. RBAC에 HPA 권한 필요
+(jenkins-rbac.yaml에 horizontalpodautoscalers 포함).
+
+### 확인
+kubectl get hpa -n was
+# TARGETS가 "cpu: N%/50%"로 나오면 정상 (생성 직후 잠깐 <unknown>은 정상)
+
+## Grafana 대시보드 복원
+
+monitoring/dashboards/service-overview.json을 import.
+Grafana → Dashboards → Import → JSON 업로드
+
 ---
 
 ## 트러블슈팅 메모
