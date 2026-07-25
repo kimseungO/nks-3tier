@@ -76,10 +76,9 @@ alloy:
         }
       }
 
-      // ===== kube-state-metrics 발견 및 수집 =====
+      // ===== kube-state-metrics =====
       discovery.kubernetes "ksm" {
         role = "service"
-
         namespaces {
           names = ["monitoring"]
         }
@@ -87,7 +86,6 @@ alloy:
 
       discovery.relabel "ksm" {
         targets = discovery.kubernetes.ksm.targets
-
         rule {
           source_labels = ["__meta_kubernetes_service_name"]
           regex         = "kube-state-metrics"
@@ -97,6 +95,33 @@ alloy:
 
       prometheus.scrape "ksm" {
         targets    = discovery.relabel.ksm.output
+        forward_to = [prometheus.remote_write.mgt.receiver]
+      }
+
+      // ===== was 앱 메트릭 =====
+      discovery.kubernetes "was_pods" {
+        role = "pod"
+        namespaces {
+          names = ["was"]
+        }
+      }
+
+      discovery.relabel "was_app" {
+        targets = discovery.kubernetes.was_pods.targets
+        rule {
+          source_labels = ["__meta_kubernetes_pod_label_app"]
+          regex         = "was"
+          action        = "keep"
+        }
+        rule {
+          source_labels = ["__meta_kubernetes_pod_container_port_number"]
+          regex         = "4000"
+          action        = "keep"
+        }
+      }
+
+      prometheus.scrape "was_app" {
+        targets    = discovery.relabel.was_app.output
         forward_to = [prometheus.remote_write.mgt.receiver]
       }
 

@@ -1,5 +1,5 @@
 # Jenkins(cicd 네임스페이스의 ServiceAccount)가
-# was/web 네임스페이스의 Deployment를 배포할 수 있는 권한
+# was/web 네임스페이스에 배포할 수 있는 권한
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -8,7 +8,10 @@ metadata:
 rules:
 - apiGroups: ["apps"]
   resources: ["deployments"]
-  verbs: ["get", "list", "patch", "update"]
+  verbs: ["get", "list", "create", "patch", "update"]
+- apiGroups: [""]
+  resources: ["configmaps", "services"]
+  verbs: ["get", "list", "create", "patch", "update"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -32,7 +35,10 @@ metadata:
 rules:
 - apiGroups: ["apps"]
   resources: ["deployments"]
-  verbs: ["get", "list", "patch", "update"]
+  verbs: ["get", "list", "create", "patch", "update"]
+- apiGroups: [""]
+  resources: ["configmaps", "services"]
+  verbs: ["get", "list", "create", "patch", "update"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

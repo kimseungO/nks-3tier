@@ -1,3 +1,8 @@
+# 실제 파일은 앱 레포(suwon-daytour-3tier) 루트에 위치.
+# 이 파일은 인프라 관점에서 파이프라인 구조를 참고하기 위한 사본이다.
+#
+# 배포 방식: 이미지 태그 PLACEHOLDER를 빌드 번호로 sed 치환 후 kubectl apply.
+# (set image가 아니라 apply — env/ConfigMap 변경도 함께 반영)
 pipeline {
   agent {
     kubernetes {
@@ -27,13 +32,12 @@ pipeline {
       '''
     }
   }
-
   environment {
     REGISTRY = 'f2da3ca6-kr2-registry.container.nhncloud.com/lab-ncr'
-    IMAGE = 'suwon-was'
+    WAS_IMAGE = 'suwon-was'
+    WEB_IMAGE = 'suwon-web'
     TAG = "${BUILD_NUMBER}"
   }
-
   stages {
     stage('Build & Push') {
       steps {
@@ -42,19 +46,26 @@ pipeline {
             /kaniko/executor \
               --context=`pwd`/was \
               --dockerfile=`pwd`/was/Dockerfile \
-              --destination=${REGISTRY}/${IMAGE}:${TAG}
+              --destination=${REGISTRY}/${WAS_IMAGE}:${TAG}
+          '''
+          sh '''
+            /kaniko/executor \
+              --context=`pwd`/web \
+              --dockerfile=`pwd`/web/Dockerfile \
+              --destination=${REGISTRY}/${WEB_IMAGE}:${TAG}
           '''
         }
       }
     }
-
     stage('Deploy') {
       steps {
         container('kubectl') {
           sh '''
-            kubectl set image deployment/was \
-              was=${REGISTRY}/${IMAGE}:${TAG} \
-              -n was
+            kubectl apply -f k8s/web-configmap.yaml
+            sed -i "s|suwon-was:PLACEHOLDER|suwon-was:${TAG}|" k8s/was.yaml
+            sed -i "s|suwon-web:PLACEHOLDER|suwon-web:${TAG}|" k8s/web.yaml
+            kubectl apply -f k8s/was.yaml
+            kubectl apply -f k8s/web.yaml
           '''
         }
       }
