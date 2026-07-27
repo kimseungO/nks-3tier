@@ -1,0 +1,40 @@
+seqread-test: (g=0): rw=read, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=16
+fio-3.6
+Starting 1 process
+Jobs: 1 (f=1)Jobs: 1 (f=1)Jobs: 1 (f=1): [R(1)][5.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:57s]Jobs: 1 (f=1): [R(1)][6.7%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:56s]Jobs: 1 (f=1): [R(1)][8.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:55s]Jobs: 1 (f=1): [R(1)][10.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:54s]Jobs: 1 (f=1): [R(1)][11.7%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:53s]
+Jobs: 1 (f=1): [R(1)][13.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:52s]Jobs: 1 (f=1): [R(1)][15.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:51s] Jobs: 1 (f=1): [R(1)][16.7%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:50s]Jobs: 1 (f=1): [R(1)][18.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:49s]Jobs: 1 (f=1): [R(1)][20.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:48s]Jobs: 1 (f=1): [R(1)][22.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:46s]
+Jobs: 1 (f=1): [R(1)][23.3%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:46s]Jobs: 1 (f=1): [R(1)][25.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:45s] Jobs: 1 (f=1): [R(1)][26.7%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:44s]Jobs: 1 (f=1): [R(1)][28.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:43s]Jobs: 1 (f=1): [R(1)][30.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:42s]Jobs: 1 (f=1): [R(1)][31.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:41s]
+Jobs: 1 (f=1): [R(1)][33.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:40s]Jobs: 1 (f=1): [R(1)][35.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:39s] Jobs: 1 (f=1): [R(1)][36.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:38s]Jobs: 1 (f=1): [R(1)][38.3%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:37s]Jobs: 1 (f=1): [R(1)][40.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:36s]Jobs: 1 (f=1): [R(1)][41.7%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:35s]
+Jobs: 1 (f=1): [R(1)][44.1%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:33s]Jobs: 1 (f=1): [R(1)][45.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:33s] Jobs: 1 (f=1): [R(1)][46.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:32s]Jobs: 1 (f=1): [R(1)][48.3%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:31s]Jobs: 1 (f=1): [R(1)][50.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:30s]Jobs: 1 (f=1): [R(1)][52.5%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:28s]
+Jobs: 1 (f=1): [R(1)][53.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:28s]Jobs: 1 (f=1): [R(1)][55.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:27s] Jobs: 1 (f=1): [R(1)][56.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:26s]Jobs: 1 (f=1): [R(1)][58.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:25s]Jobs: 1 (f=1): [R(1)][60.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:24s]Jobs: 1 (f=1): [R(1)][62.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:22s]
+Jobs: 1 (f=1): [R(1)][63.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:22s]Jobs: 1 (f=1): [R(1)][66.1%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:20s] Jobs: 1 (f=1): [R(1)][66.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:20s]Jobs: 1 (f=1): [R(1)][68.3%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:19s]Jobs: 1 (f=1): [R(1)][70.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:18s]Jobs: 1 (f=1): [R(1)][71.7%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:17s]
+Jobs: 1 (f=1): [R(1)][73.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:16s]Jobs: 1 (f=1): [R(1)][75.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:15s] Jobs: 1 (f=1): [R(1)][76.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:14s]Jobs: 1 (f=1): [R(1)][78.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:13s]Jobs: 1 (f=1): [R(1)][80.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:12s]Jobs: 1 (f=1): [R(1)][81.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:11s]
+Jobs: 1 (f=1): [R(1)][83.3%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:10s]Jobs: 1 (f=1): [R(1)][85.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:09s] Jobs: 1 (f=1): [R(1)][88.1%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:07s]Jobs: 1 (f=1): [R(1)][88.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:07s]Jobs: 1 (f=1): [R(1)][90.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:06s]Jobs: 1 (f=1): [R(1)][91.7%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:05s]
+Jobs: 1 (f=1): [R(1)][93.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:04s]Jobs: 1 (f=1): [R(1)][95.0%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:03s] Jobs: 1 (f=1): [R(1)][96.7%][r=64.0MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:02s]Jobs: 1 (f=1): [R(1)][98.3%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:01s]Jobs: 1 (f=1): [R(1)][100.0%][r=64.1MiB/s,w=0KiB/s][r=64,w=0 IOPS][eta 00m:00s]
+seqread-test: (groupid=0, jobs=1): err= 0: pid=80: Mon Jul 27 13:38:31 2026
+   read: IOPS=64, BW=64.1MiB/s (67.2MB/s)(3863MiB/60243msec)
+    slat (usec): min=34, max=2909, avg=81.34, stdev=84.20
+    clat (msec): min=9, max=469, avg=249.33, stdev=16.21
+     lat (msec): min=10, max=469, avg=249.41, stdev=16.16
+    clat percentiles (msec):
+     |  1.00th=[  243],  5.00th=[  249], 10.00th=[  249], 20.00th=[  249],
+     | 30.00th=[  251], 40.00th=[  251], 50.00th=[  251], 60.00th=[  251],
+     | 70.00th=[  251], 80.00th=[  251], 90.00th=[  251], 95.00th=[  251],
+     | 99.00th=[  257], 99.50th=[  266], 99.90th=[  422], 99.95th=[  456],
+     | 99.99th=[  468]
+   bw (  KiB/s): min=61440, max=79872, per=99.98%, avg=65650.01, stdev=1437.76, samples=120
+   iops        : min=   60, max=   78, avg=64.07, stdev= 1.42, samples=120
+  lat (msec)   : 10=0.03%, 20=0.21%, 50=0.05%, 100=0.08%, 250=57.57%
+  lat (msec)   : 500=42.07%
+  cpu          : usr=0.16%, sys=0.68%, ctx=3901, majf=0, minf=4108
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.2%, 16=99.6%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=3863,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=16
+
+Run status group 0 (all jobs):
+   READ: bw=64.1MiB/s (67.2MB/s), 64.1MiB/s-64.1MiB/s (67.2MB/s-67.2MB/s), io=3863MiB (4051MB), run=60243-60243msec
+
+Disk stats (read/write):
+  vdc: ios=8194/3, merge=0/1, ticks=2038925/32, in_queue=2038957, util=99.89%
