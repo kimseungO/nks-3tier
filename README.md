@@ -14,3 +14,6 @@
 
 이 레포는 프로젝트의 **관리형 플랫폼(NKS) 운영 계층**을 담당합니다.
 앱 변경과 인프라 변경의 배포 주기가 달라 애플리케이션 레포와 분리했습니다.
+
+<img width="1937" height="969" alt="image" src="https://github.com/user-attachments/assets/c9120b94-a5de-4811-99bc-c61a59ece293" />
+
