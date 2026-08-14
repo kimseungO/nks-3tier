@@ -183,10 +183,9 @@ blackbox-exporter  →  외부에서 서비스 생존 확인
 
 ### 4-3. 서비스 관제 대시보드
 
-
-<img width="1291" height="924" alt="image" src="https://github.com/user-attachments/assets/f5920849-5c5e-497c-a2a1-62e6e4cc8d98" />
-<img width="1305" height="924" alt="image" src="https://github.com/user-attachments/assets/46015ce8-5841-438c-bce2-a9bcbbefa07b" />
-
+<div style="display: flex; gap: 10px;">
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/f5920849-5c5e-497c-a2a1-62e6e4cc8d98" /><img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/46015ce8-5841-438c-bce2-a9bcbbefa07b" />
+</div>
 
 커뮤니티 대시보드를 가져오는 대신, 이 서비스를 관제하는 데 실제로 필요한 지표를 직접 선별했습니다.
 
