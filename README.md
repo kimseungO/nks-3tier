@@ -295,16 +295,6 @@ Jenkins를 클러스터 내부에 두면 이 문제가 발생하지 않으며, �
 
 </details>
 
-<details>
-<summary><b>Kaniko</b> — Docker-in-Docker 대신 특권 없는 빌드</summary>
-
-<br>
-
-Jenkins가 Pod로 동작하므로 Docker 데몬이 없습니다. DinD는 특권 컨테이너를 요구하는데, 이는 컨테이너가 호스트에 광범위하게 접근할 수 있다는 의미이므로 보안 요구사항과 충돌합니다.
-
-Kaniko는 Dockerfile을 사용자 공간에서 실행해 특권 없이 이미지를 빌드하고, 완성된 이미지를 레지스트리로 직접 push합니다.
-
-</details>
 
 <details>
 <summary><b>Pod 오토스케일링</b> — Cluster Autoscaler를 도입하지 않은 이유</summary>
@@ -339,8 +329,6 @@ Kaniko는 Dockerfile을 사용자 공간에서 실행해 특권 없이 이미지
 
 ## 7. 저장소 구조
 
-이 저장소는 **인프라 공통 설정**을 관리합니다. 애플리케이션 코드와 배포 매니페스트는 별도 저장소에 있으며, CI/CD 파이프라인이 이를 배포합니다.
-
 ```
 nks-3tier/
 ├── k8s/
@@ -364,32 +352,6 @@ nks-3tier/
     └── rebuild-guide.md        전체 재구축 가이드
 ```
 
-> 자격증명, 키, kubeconfig 등 민감 정보는 저장소에 포함하지 않으며 생성 절차만 문서화되어 있습니다.
-
----
-
-## 8. 재구축
-
-클러스터를 삭제한 뒤 전체를 다시 구축하는 절차를 [`docs/rebuild-guide.md`](docs/rebuild-guide.md)에 정리했습니다. 콘솔 작업과 명령 기반 작업을 순서대로 포함하며, 예상 소요 시간은 약 60분입니다.
-
-다음 항목은 누락 시 후속 단계가 실패하므로 가이드에서 별도로 강조했습니다.
-
-- `cinder-csi-plugin` 애드온 설치 — 미설치 시 PVC 사용 불가
-- StorageClass의 `fstype` 선언 — 미선언 시 non-root 워크로드 기동 실패
-- LoadBalancer 헬스체크 경로 `/healthz` — 기본값 사용 시 멤버 INACTIVE
-- 워커 노드 IP와 공인 IP는 재생성 시 변경되므로 LB 멤버·모니터링 대상 갱신 필요
-
----
-
-## 9. 다음 단계
-
-이 프로젝트는 Managed Kubernetes 환경에서의 인프라 구축과 운영을 다뤘습니다. 다음 단계로 **동일한 서비스를 Self-managed Kubernetes(OpenStack + Ceph) 위에 구축하여 두 환경을 비교**할 예정입니다.
-
-Managed 환경에서는 스토리지 성능을 측정할 수는 있지만, 그 수치가 왜 나오는지는 알 수 없습니다. 백엔드 구성, 복제 정책, 물리 디스크 상태에 접근할 수 없기 때문입니다. Self-managed 환경에서는 동일한 측정값이 어느 계층에서 병목이 되는지 물리 디스크까지 추적할 수 있습니다.
-
-비교의 기준선으로 이 환경에서 측정한 스토리지 성능 데이터를 [`benchmark/`](benchmark/)에 보관해 두었습니다.
-
----
 
 ## 관련 링크
 
