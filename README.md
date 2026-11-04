@@ -187,7 +187,7 @@ blackbox-exporter  →  외부에서 서비스 생존 확인
 <img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/f5920849-5c5e-497c-a2a1-62e6e4cc8d98" /><img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/46015ce8-5841-438c-bce2-a9bcbbefa07b" />
 </div>
 
-커뮤니티 대시보드를 가져오는 대신, 이 서비스를 관제하는 데 실제로 필요한 지표를 직접 선별했습니다.
+서비스를 관제하는 데 실제로 필요한 지표를 직접 선별해 보았습니다.
 
 | 관제 질문 | 패널 | 지표 |
 |-----------|------|------|
